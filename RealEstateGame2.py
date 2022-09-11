@@ -6,6 +6,9 @@
 # around a 25 space board, and have the option to buy property and collect rent on that space. The game is over when
 # everyone except the winner has $0 in their account.
 
+# also a test for git
+
+
 class RealEstateGame:
     """RealEstateGame class to represent Real Estate game, played by two or more players. Players start at “GO” space
     on board. Take turns moving around the 25 board spaces, arranged in a circle."""

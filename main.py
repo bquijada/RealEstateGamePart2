@@ -6,6 +6,8 @@ from tkinter import messagebox
 root = Tk()
 root.title("Real Estate Game")
 
+# this is  a test for git
+
 # Ask the user if they want to start a new game. Initiate new real estate game object with already determined rents
 
 frame = LabelFrame(root, text="Real Estate Game", padx=50, pady=50)
