@@ -67,7 +67,7 @@ class RealEstateGame:
         """takes as parameter the name of player. If the player has an account balance more than the purchase price,
          and the space doesn't already have an owner, then the player buys space. Price will be deducted from their
          account and player is set as the owner of the current space. In this case method returns true, otherwise
-         returns False99."""
+         returns False."""
         for player in self._players_list:
             if player.get_name() == p_name:
                 player_to_buy = player

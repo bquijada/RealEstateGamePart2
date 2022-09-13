@@ -2,6 +2,7 @@ import random
 from tkinter import *
 from RealEstateGame2 import *
 from tkinter import messagebox
+import itertools as IT
 
 root = Tk()
 root.title("Real Estate Game")
@@ -84,6 +85,8 @@ global money_label
 global position_label
 global label_list
 global pos_list
+global colors
+global board_spaces_
 
 
 def start_game():
@@ -95,6 +98,28 @@ def start_game():
     global position_label
     global label_list
     global pos_list
+    global colors
+    global board_spaces_
+
+    colors = ['red', 'blue', 'yellow', 'green']
+
+    # create the game board
+    game_board_top = Toplevel()
+    cols, rows = 7, 8
+    board = [[None] * cols for _ in range(rows)]
+    nums = ['GO', 1, 2, 3, 4, 5, 6, 25, 7, 24, 8, 23, 9, 22, 10, 21, 11, 20, 12, 19, 18, 17, 16, 15, 14, 13]
+    x = 0
+
+    for i, j in IT.product(range(rows), range(cols)):
+        if i == 0 or i == 7:
+            board[i][j] = L = Label(game_board_top, text=str(nums[x]), bg='light green', font=('Times', 24))
+            x += 1
+            L.grid(row=i, column=j, padx=3, pady=3)
+        elif j == 0 or j == 6:
+            board[i][j] = L = Label(game_board_top, text=str(nums[x]), bg='light green', font=('Times', 24))
+            x += 1
+            L.grid(row=i, column=j, padx=3, pady=3)
+
     # loop through all children in each frame and delete them.
     for widget in frame.winfo_children():
         widget.destroy()
@@ -103,6 +128,9 @@ def start_game():
     label_list = []
     label_title = Label(frame, text="Player's Status")
     label_title.place(x=150, y=0)
+
+    label_title = Label(frame, text="Color")
+    label_title.place(x=0, y=20)
 
     label_title = Label(frame, text="Name")
     label_title.place(x=50, y=20)
@@ -113,7 +141,11 @@ def start_game():
     label_title = Label(frame, text="Position")
     label_title.place(x=250, y=20)
 
-    for player in new_game.get_players_list():
+    for player, color in zip(new_game.get_players_list(), colors):
+
+        color_label = Label(frame, text='color', font='bold, 16', fg=color, bg=color)
+        color_label.place(x=0, y=yaxis)
+
         name = player.get_name()
         name_label = Label(frame, text=name, font='bold, 16')
         name_label.place(x=50, y=yaxis)
@@ -175,7 +207,7 @@ def start_game():
             label_no_buy.place(x=360, y=300)
             update()
         else:
-            label_no_buy = Label(frame, text="Purchase unsuccessful." + answer)
+            label_no_buy = Label(frame, text="Purchase unsuccessful. " + answer)
             label_no_buy.place(x=360, y=300)
         button_continue = Button(frame, text="Next Player", command=next_player, padx=20, pady=20)
         button_continue.place(x=560, y=220)
